@@ -6,23 +6,24 @@ export type IReview = {
   rating: number;
 };
 
+export type IProductCategory =
+  | "Processor"
+  | "Motherboard"
+  | "RAM"
+  | "Power Supply"
+  | "Storage"
+  | "Monitor"
+  | "Graphics Card"
+  | "Casing"
+  | "CPU Cooler"
+  | "UPS"
+  | "Accessories";
+
 export type IProduct = {
   _id: string;
   image: string;
   name: string;
-  category:
-    | "Processor"
-    | "Motherboard"
-    | "RAM"
-    | "Power Supply"
-    | "Storage"
-    | "Monitor"
-    | "Graphics Card"
-    | "Casing"
-    | "CPU Cooler"
-    | "UPS"
-    | "Accessories";
-
+  category: IProductCategory;
   status: "In Stock" | "Out of Stock";
   price: number;
   brand: string;

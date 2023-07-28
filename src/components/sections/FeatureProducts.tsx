@@ -17,7 +17,7 @@ const FeatureProducts = ({ products }: FeatureProductsProps) => {
         </p>
       </div>
       <div>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 px-5 lg:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center items-center px-5 lg:px-0">
           {products?.length &&
             products?.map((product) => (
               <ProductCard key={product._id} product={product} />

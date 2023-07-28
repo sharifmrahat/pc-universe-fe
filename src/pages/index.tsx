@@ -4,13 +4,12 @@ import DefaultLayout from "@/layouts/default";
 import HeroSection from "@/components/sections/HeroSection";
 import FeatureProducts from "@/components/sections/FeatureProducts";
 import FeatureCategories from "@/components/sections/FeatureCategories";
-import { IProduct } from "@/types/product";
+import { IProduct, IProductCategory } from "@/types/product";
 
 type HomePageProps = {
   products?: IProduct[];
 };
 const HomePage: NextPageWithLayout = ({ products }: HomePageProps) => {
-  console.log(products);
   return (
     <main className="w-full lg:max-w-7xl mx-auto px-5 lg:px-0 pb-10">
       <section>
@@ -19,7 +18,7 @@ const HomePage: NextPageWithLayout = ({ products }: HomePageProps) => {
       <section className="my-10">
         <FeatureProducts products={products as IProduct[]} />
       </section>
-      <section className="my-10">
+      <section className="my-20">
         <FeatureCategories />
       </section>
     </main>
