@@ -1,4 +1,5 @@
 import { JSX, SVGProps } from "react";
+import { Poppins } from "next/font/google";
 
 const navigation = {
   main: [
@@ -73,11 +74,12 @@ const navigation = {
     },
   ],
 };
+const poppins = Poppins({ style: "normal", weight: "400", subsets: ["latin"] });
 
 export default function Footer() {
   return (
-    <footer className="bg-primary">
-      <div className="mx-auto w-full lg:max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+    <footer className={`${poppins.className} bg-primary`}>
+      <div className="mx-auto w-full lg:max-w-7xl overflow-hidden px-6 py-10 lg:px-8">
         <nav
           className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
           aria-label="Footer"
@@ -105,7 +107,7 @@ export default function Footer() {
             </a>
           ))}
         </div>
-        <p className="mt-10 text-center text-xs leading-5 text-gray-500">
+        <p className="mt-10 text-center text-xs leading-5 text-secondary">
           &copy; 2023 PC Universe | All rights reserved.
         </p>
       </div>
