@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <SessionProvider session={pageProps.session}>
         {getLayout(
-          <main className={`${poppins.className}`}>
+          <main className={`${poppins.className} bg-background`}>
             <Component {...pageProps} />
           </main>
         )}

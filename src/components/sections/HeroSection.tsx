@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-between items-center bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200">
+    <div className="flex flex-col-reverse lg:flex-row justify-between items-center bg-background dark:bg-slate-700 text-slate-900 dark:text-slate-200">
       <div className="mx-auto lg:max-w-7xl">
-        <div className="bg-white dark:bg-slate-700 pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+        <div className="bg-background dark:bg-slate-700 pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
           <main className="mx-auto mt-10 max-w-7xl sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 xl:mt-28">
             <div className="sm:text-center lg:text-left px-5 lg:px-0 text-center">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-300 sm:text-4xl md:text-5xl">

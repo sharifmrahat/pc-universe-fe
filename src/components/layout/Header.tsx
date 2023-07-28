@@ -59,7 +59,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className={`${poppins.className} bg-primary sticky top-0`}>
+    <header className={`${poppins.className} bg-primary sticky top-0 z-50`}>
       <nav
         className="mx-auto flex lg:max-w-7xl items-center justify-between py-4"
         aria-label="Global"
