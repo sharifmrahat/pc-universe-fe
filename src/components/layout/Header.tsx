@@ -2,50 +2,42 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
-  ArrowPathIcon,
   Bars3Icon,
   ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
+  ComputerDesktopIcon,
+  CpuChipIcon,
+  CubeIcon,
   SquaresPlusIcon,
+  SwatchIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import {
+  BsMotherboard,
+  BsMemory,
+  BsPlugin,
+  BsDeviceSsd,
+  BsFan,
+} from "react-icons/bs";
+import { CiMonitor, CiPassport1 } from "react-icons/ci";
+import { GrMemory } from "react-icons/gr";
+import { PiBatteryChargingVerticalFill, PiCircuitry } from "react-icons/pi";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Oswald } from "next/font/google";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 
-const products = [
-  {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
-  },
+const categories = [
+  { name: "Processor", icon: CpuChipIcon },
+  { name: "Motherboard", icon: BsMotherboard },
+  { name: "RAM", icon: BsMemory },
+  { name: "Power Supply", icon: BsPlugin },
+  { name: "Storage", icon: BsDeviceSsd },
+  { name: "Monitor", icon: ComputerDesktopIcon },
+  { name: "Graphics Card", icon: PiCircuitry },
+  { name: "Casing", icon: CubeIcon },
+  { name: "CPU Cooler", icon: BsFan },
+  { name: "UPS", icon: PiBatteryChargingVerticalFill },
+  { name: "Accessories", icon: SwatchIcon },
 ];
 
 const poppins = Poppins({ style: "normal", weight: "400", subsets: ["latin"] });
@@ -121,7 +113,7 @@ export default function Header() {
             >
               <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-hidden rounded bg-white shadow-lg">
                 <div className="p-4">
-                  {products.map((item) => (
+                  {categories.map((item) => (
                     <div
                       key={item.name}
                       className="group relative flex items-center gap-x-6 rounded text-sm leading-6 hover:bg-accent text-slate-600 hover:text-primary"
@@ -133,7 +125,10 @@ export default function Header() {
                         />
                       </div>
                       <div className="flex-auto">
-                        <Link href={item.href} className="block font-semibold ">
+                        <Link
+                          href={`/products?category=${item.name}`}
+                          className="block font-semibold "
+                        >
                           {item.name}
                           <span className="absolute inset-0" />
                         </Link>
@@ -228,11 +223,11 @@ export default function Header() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2 bg-accent text-primary rounded p-2">
-                        {[...products].map((item) => (
+                        {categories.map((item) => (
                           <Disclosure.Button
                             key={item.name}
                             as="a"
-                            href={item.href}
+                            href={`/products?category=${item.name}`}
                             className="block rounded p-2 text-sm font-semibold leading-7 text-slate-600 hover:bg-primary hover:text-accent"
                           >
                             <item.icon
