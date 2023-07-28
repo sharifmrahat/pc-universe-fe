@@ -1,16 +1,13 @@
-import Header from "@/components/layout/Header";
-import { Oswald } from "next/font/google";
+import { NextPageWithLayout } from "./_app";
+import { ReactElement } from "react";
+import DefaultLayout from "@/layouts/default";
 
-const oswald = Oswald({ style: "normal", weight: "600", subsets: ["latin"] });
+const HomePage: NextPageWithLayout = () => {
+  return <main className="w-full lg:max-w-7xl mx-auto my-10">home page</main>;
+};
 
-export default function Home() {
-  return (
-    <main>
-      <div
-        className={`text-xl font-semibold bg-primary text-accent p-10 ${oswald.className}`}
-      >
-        PC UNIVERSE
-      </div>
-    </main>
-  );
-}
+HomePage.getLayout = function getLayout(page: ReactElement) {
+  return <DefaultLayout>{page}</DefaultLayout>;
+};
+
+export default HomePage;
