@@ -1,19 +1,37 @@
 import { IProductCategory } from "@/types/product";
 import CategoryCard from "../shared/CategoryCard";
 
+import {
+  Bars3Icon,
+  ComputerDesktopIcon,
+  CpuChipIcon,
+  CubeIcon,
+  SquaresPlusIcon,
+  SwatchIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import {
+  BsMotherboard,
+  BsMemory,
+  BsPlugin,
+  BsDeviceSsd,
+  BsFan,
+} from "react-icons/bs";
+import { PiBatteryChargingVerticalFill, PiCircuitry } from "react-icons/pi";
+
 const FeatureCategories = () => {
-  const categories: { name: IProductCategory; image: string }[] = [
-    { name: "Processor", image: "processor.jpg" },
-    { name: "Motherboard", image: "motherboard.jpg" },
-    { name: "RAM", image: "ram.jpg" },
-    { name: "Power Supply", image: "power-supply.jpg" },
-    { name: "Storage", image: "storage.jpg" },
-    { name: "Monitor", image: "monitor.jpg" },
-    { name: "Graphics Card", image: "graphics-card.jpg" },
-    { name: "Casing", image: "casing.jpg" },
-    { name: "CPU Cooler", image: "cpu-cooler.jpg" },
-    { name: "UPS", image: "ups.jpg" },
-    { name: "Accessories", image: "accessories.jpg" },
+  const categories: { name: IProductCategory; icon: any }[] = [
+    { name: "Processor", icon: CpuChipIcon },
+    { name: "Motherboard", icon: BsMotherboard },
+    { name: "RAM", icon: BsMemory },
+    { name: "Power Supply", icon: BsPlugin },
+    { name: "Storage", icon: BsDeviceSsd },
+    { name: "Monitor", icon: ComputerDesktopIcon },
+    // { name: "Graphics Card", icon: PiCircuitry },
+    // { name: "Casing", icon: CubeIcon },
+    // { name: "CPU Cooler", icon: BsFan },
+    // { name: "UPS", icon: PiBatteryChargingVerticalFill },
+    // { name: "Accessories", icon: SwatchIcon },
   ];
 
   return (

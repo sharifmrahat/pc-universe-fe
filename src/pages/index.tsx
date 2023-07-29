@@ -33,7 +33,9 @@ HomePage.getLayout = function getLayout(page: ReactElement) {
 export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("https://pc-universe-be.vercel.app/api/v1/products");
+  const res = await fetch(
+    "https://pc-universe-be.vercel.app/api/v1/products?limit=6"
+  );
   const products = await res.json();
   return {
     props: {

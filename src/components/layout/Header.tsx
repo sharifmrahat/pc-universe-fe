@@ -3,7 +3,6 @@ import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
-  ChartPieIcon,
   ComputerDesktopIcon,
   CpuChipIcon,
   CubeIcon,
@@ -18,8 +17,6 @@ import {
   BsDeviceSsd,
   BsFan,
 } from "react-icons/bs";
-import { CiMonitor, CiPassport1 } from "react-icons/ci";
-import { GrMemory } from "react-icons/gr";
 import { PiBatteryChargingVerticalFill, PiCircuitry } from "react-icons/pi";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Oswald } from "next/font/google";
@@ -126,7 +123,7 @@ export default function Header() {
                       </div>
                       <div className="flex-auto">
                         <Link
-                          href={`/products?category=${item.name}`}
+                          href={`/categories/${item.name}`}
                           className="block font-semibold "
                         >
                           {item.name}
@@ -227,7 +224,7 @@ export default function Header() {
                           <Disclosure.Button
                             key={item.name}
                             as="a"
-                            href={`/products?category=${item.name}`}
+                            href={`/categories/${item.name}`}
                             className="block rounded p-2 text-sm font-semibold leading-7 text-slate-600 hover:bg-primary hover:text-accent"
                           >
                             <item.icon
