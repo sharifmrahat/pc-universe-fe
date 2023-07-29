@@ -5,6 +5,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import FeatureProducts from "@/components/sections/FeatureProducts";
 import FeatureCategories from "@/components/sections/FeatureCategories";
 import { IProduct, IProductCategory } from "@/types/product";
+import { GetStaticProps } from "next";
 
 type HomePageProps = {
   products?: IProduct[];
@@ -31,7 +32,7 @@ HomePage.getLayout = function getLayout(page: ReactElement) {
 
 export default HomePage;
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch("https://pc-universe-be.vercel.app/api/v1/products");
   const products = await res.json();
   return {
