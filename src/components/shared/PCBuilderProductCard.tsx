@@ -6,6 +6,7 @@ import {
   ShoppingCartIcon,
   SquaresPlusIcon,
 } from "@heroicons/react/24/outline";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 type PCBuilderProductCardProps = {
@@ -13,16 +14,34 @@ type PCBuilderProductCardProps = {
 };
 
 const PCBuilderProductCard = ({ product }: PCBuilderProductCardProps) => {
+  const { data: session } = useSession();
   const router = useRouter();
   const handleNavigation = () => {
     router.replace(`/products/${product._id}`);
     router.push(`/products/${product._id}`);
   };
 
-  const handleAddToBuilder = () => {
-    //call API
-    router.push(`/pc-builder`);
+  const handleAddToBuilder = (productId: string) => {
+    const data = {
+      user: session?.user?.email,
+      items: [productId],
+    };
+    if (session?.user && data) {
+      fetch("https://pc-universe-be.vercel.app/api/v1/pc-builders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          router.push("/pc-builder");
+        })
+        .catch((error) => {});
+    }
   };
+
   return (
     <div className="bg-white shadow-sm rounded border overflow-hidden hover:shadow-lg cursor-pointer">
       <div onClick={handleNavigation}>
@@ -61,7 +80,7 @@ const PCBuilderProductCard = ({ product }: PCBuilderProductCardProps) => {
         </div>
         <div>
           <div
-            onClick={handleAddToBuilder}
+            onClick={() => handleAddToBuilder(product._id)}
             className="bg-primary w-full text-accent p-2 cursor-pointer flex flex-row justify-center items-center gap-2"
           >
             <PlusCircleIcon className="w-6 h-6" /> <p>Add to Builder</p>
