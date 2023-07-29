@@ -2,9 +2,7 @@
 import { IProduct } from "@/types/product";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { ShoppingCartIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 type ProductCardProps = {
   product: IProduct;

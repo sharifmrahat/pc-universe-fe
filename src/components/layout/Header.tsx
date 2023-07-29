@@ -58,8 +58,6 @@ export default function Header() {
 
   const { data: session } = useSession();
 
-  console.log(session);
-
   return (
     <header className={`${poppins.className} bg-primary sticky top-0 z-50`}>
       <nav
