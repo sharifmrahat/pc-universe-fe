@@ -30,7 +30,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Oswald } from "next/font/google";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { getCsrfToken, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const categories = [
   { name: "Processor", icon: CpuChipIcon },
