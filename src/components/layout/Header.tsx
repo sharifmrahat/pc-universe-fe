@@ -30,7 +30,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Oswald } from "next/font/google";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { getCsrfToken, signOut, useSession } from "next-auth/react";
 
 const categories = [
   { name: "Processor", icon: CpuChipIcon },
@@ -280,17 +280,116 @@ export default function Header() {
           </div>
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-accent/50">
+              <div className="py-6 flex flex-row justify-center items-center gap-5">
+                <Link
+                  onClick={() => setMobileMenuOpen(false)}
+                  href="/pc-builder"
+                  className="text-sm font-semibold leading-6 text-accent border-2 py-1 px-3 rounded border-secondary hover:text-secondary w-fit text-center"
+                >
+                  <SquaresPlusIcon className="w-4 h-4 mr-3 inline-block" />
+                  PC Builder
+                </Link>
+                {session?.user ? (
+                  <Menu as="div" className="relative ml-3 w-fit">
+                    <div>
+                      <Menu.Button className="relative flex rounded-full bg-white text-sm border-2 border-secondary w-fit">
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">Open user menu</span>
+                        {session.user.image ? (
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={session.user.image}
+                            alt=""
+                          />
+                        ) : (
+                          <UserCircleIcon className="h-10 w-10 text-slate-500" />
+                        )}
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-200"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          <p className="px-4 py-1 text-primary font-semibold text-center">
+                            {session.user.name}
+                          </p>
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              onClick={() => setMobileMenuOpen(false)}
+                              href="/profile"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Profile
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              onClick={() => setMobileMenuOpen(false)}
+                              href="/orders"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Orders
+                            </Link>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <div
+                              onClick={() => signOut()}
+                              className={classNames(
+                                active
+                                  ? "bg-red-200 text-primary"
+                                  : "text-primary",
+                                "block px-4 py-2 text-sm text-red-600 cursor-pointer"
+                              )}
+                            >
+                              Logout
+                            </div>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                ) : (
+                  <Link
+                    onClick={() => setMobileMenuOpen(false)}
+                    href="/login"
+                    className="text-sm font-semibold leading-6 text-primary bg-accent py-1 px-3 rounded hover:bg-secondary hover:border-secondary border-2 w-fit"
+                  >
+                    Login
+                  </Link>
+                )}
+              </div>
               <div className="space-y-2 py-6">
                 <Disclosure as="div" className="-mx-3">
                   {({ open }) => (
                     <>
                       <Link
+                        onClick={() => setMobileMenuOpen(false)}
                         href="/"
                         className="rounded py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-accent hover:bg-accent hover:text-primary block"
                       >
                         Home
                       </Link>
                       <Link
+                        onClick={() => setMobileMenuOpen(false)}
                         href="/products"
                         className="rounded py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-accent hover:bg-accent hover:text-primary block"
                       >
@@ -308,9 +407,9 @@ export default function Header() {
                       </Disclosure.Button>
                       <Disclosure.Panel className="mt-2 space-y-2 bg-accent text-primary rounded p-2">
                         {categories.map((item) => (
-                          <Disclosure.Button
+                          <Link
+                            onClick={() => setMobileMenuOpen(false)}
                             key={item.name}
-                            as="a"
                             href={`/categories/${item.name}`}
                             className="block rounded p-2 text-sm font-semibold leading-7 text-slate-600 hover:bg-primary hover:text-accent"
                           >
@@ -319,16 +418,18 @@ export default function Header() {
                               aria-hidden="true"
                             />{" "}
                             {item.name}
-                          </Disclosure.Button>
+                          </Link>
                         ))}
                       </Disclosure.Panel>
                       <Link
+                        onClick={() => setMobileMenuOpen(false)}
                         href="/promotion"
                         className="rounded py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-accent hover:bg-accent hover:text-primary block"
                       >
                         Promotion
                       </Link>
                       <Link
+                        onClick={() => setMobileMenuOpen(false)}
                         href="/service"
                         className="rounded py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-accent hover:bg-accent hover:text-primary block"
                       >
@@ -337,21 +438,6 @@ export default function Header() {
                     </>
                   )}
                 </Disclosure>
-              </div>
-              <div className="py-6 flex flex-row justify-center items-center gap-5">
-                <Link
-                  href="/pc-builder"
-                  className="text-sm font-semibold leading-6 text-accent border-2 py-1 px-3 rounded border-secondary hover:text-secondary w-fit"
-                >
-                  <SquaresPlusIcon className="w-4 h-4 mr-3 inline-block" />
-                  PC Builder
-                </Link>
-                <Link
-                  href="/login"
-                  className="text-sm font-semibold leading-6 text-primary bg-accent py-1 px-3 rounded hover:bg-secondary hover:border-secondary border-2 w-fit"
-                >
-                  Login
-                </Link>
               </div>
             </div>
           </div>

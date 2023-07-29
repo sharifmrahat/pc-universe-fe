@@ -5,10 +5,14 @@ import LoginForm from "@/components/shared/LoginForm";
 import Link from "next/link";
 import { Oswald } from "next/font/google";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const oswald = Oswald({ style: "normal", weight: "600", subsets: ["latin"] });
 
 const LoginPage = () => {
+  const router = useRouter();
+
+  const { callbackUrl } = router.query;
   const handleLoginSubmit = (data: any) => {};
 
   return (
@@ -36,7 +40,8 @@ const LoginPage = () => {
               <button
                 onClick={() =>
                   signIn("google", {
-                    callbackUrl: "http://localhost:3000/",
+                    callbackUrl:
+                      (callbackUrl as string) || "http://localhost:3000/",
                   })
                 }
                 className="border-2 border-accent w-fit mx-auto flex flex-row justify-center items-center gap-4 rounded-md p-2"
