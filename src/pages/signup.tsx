@@ -4,6 +4,7 @@ import googleLogo from "@/assets/images/google.png";
 import Link from "next/link";
 import { Oswald } from "next/font/google";
 import SignupForm from "@/components/shared/SignupForm";
+import { signIn } from "next-auth/react";
 
 const oswald = Oswald({ style: "normal", weight: "600", subsets: ["latin"] });
 
@@ -33,7 +34,11 @@ const Signup = () => {
           <div className="bg-white p-6 rounded shadow">
             <div className="mb-5">
               <button
-                // onClick={() => signInWithGoogle()}
+                onClick={() =>
+                  signIn("google", {
+                    callbackUrl: "http://localhost:3000/",
+                  })
+                }
                 className="border-2 border-accent w-fit mx-auto flex flex-row justify-center items-center gap-4 rounded-md p-2"
               >
                 <img src={googleLogo.src} alt="" className="w-6 mx-auto" />

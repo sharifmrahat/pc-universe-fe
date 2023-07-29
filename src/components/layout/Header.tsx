@@ -1,6 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  Disclosure,
+  Popover,
+  Menu,
+  Transition,
+} from "@headlessui/react";
 import {
   Bars3Icon,
   ComputerDesktopIcon,
@@ -8,6 +14,8 @@ import {
   CubeIcon,
   SquaresPlusIcon,
   SwatchIcon,
+  UserCircleIcon,
+  UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
@@ -22,6 +30,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Oswald } from "next/font/google";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
 
 const categories = [
   { name: "Processor", icon: CpuChipIcon },
@@ -46,6 +55,10 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { data: session } = useSession();
+
+  console.log(session);
 
   return (
     <header className={`${poppins.className} bg-primary sticky top-0 z-50`}>
@@ -157,12 +170,88 @@ export default function Header() {
             <SquaresPlusIcon className="w-4 h-4 mr-3 inline-block" />
             PC Builder
           </Link>
-          <Link
-            href="/login"
-            className="text-sm font-semibold leading-6 text-primary bg-accent py-1 px-3 rounded hover:bg-secondary hover:border-secondary border-2"
-          >
-            Login
-          </Link>
+          {session?.user ? (
+            <Menu as="div" className="relative ml-3">
+              <div>
+                <Menu.Button className="relative flex rounded-full bg-white text-sm border-2 border-secondary">
+                  <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Open user menu</span>
+                  {session.user.image ? (
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src={session.user.image}
+                      alt=""
+                    />
+                  ) : (
+                    <UserCircleIcon className="h-10 w-10 text-slate-500" />
+                  )}
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Item>
+                    <p className="px-4 py-1 text-primary font-semibold text-center">
+                      {session.user.name}
+                    </p>
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="/profile"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Profile
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="/orders"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Orders
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <div
+                        onClick={() => signOut()}
+                        className={classNames(
+                          active ? "bg-red-200 text-primary" : "text-primary",
+                          "block px-4 py-2 text-sm text-red-600 cursor-pointer"
+                        )}
+                      >
+                        Logout
+                      </div>
+                    )}
+                  </Menu.Item>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          ) : (
+            <Link
+              href="/login"
+              className="text-sm font-semibold leading-6 text-primary bg-accent py-1 px-3 rounded hover:bg-secondary hover:border-secondary border-2"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </nav>
       <Dialog
