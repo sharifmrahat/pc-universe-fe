@@ -1,13 +1,13 @@
 ## PC Universe | Front-End
 
-- Live Link: 
+- Live Link: https://pc-universe-fe.vercel.app/
 
 
 ### Description
 Discover the ultimate PC building experience on our website! Unleash your creativity by handpicking premium components for your dream rig. With a user-friendly interface, assemble your ideal PC in just a few simple steps. Whether you're a gamer, content creator, or professional, we've got you covered. Build, customize, and achieve peak performance effortlessly. Start crafting your personalized powerhouse today!
 
 
-### Features & Instructions
+### Features
 
 At our website, we've harnessed the latest web technologies to create a cutting-edge platform that allows users to build their dream PCs with ease and efficiency. Below are some of the exciting features we offer:
 
