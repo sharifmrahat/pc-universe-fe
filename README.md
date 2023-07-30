@@ -1,6 +1,6 @@
 ## PC Universe | Front-End
 
-Live Link: https://pc-universe-fe.vercel.app/
+Live Link: https://pc-universe-fe.vercel.app
 
 
 ### Description
