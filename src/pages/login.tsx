@@ -45,7 +45,8 @@ const LoginPage = () => {
                 onClick={() =>
                   signIn("google", {
                     callbackUrl:
-                      (callbackUrl as string) || "http://localhost:3000/",
+                      (callbackUrl as string) ||
+                      "https://pc-universe-fe.vercel.app/",
                   })
                 }
                 className="border-2 border-accent w-fit mx-auto flex flex-row justify-center items-center gap-4 rounded-md p-2"
