@@ -1,39 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## PC Universe | Front-End
 
-## Getting Started
+- Live Link: 
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Description
+Discover the ultimate PC building experience on our website! Unleash your creativity by handpicking premium components for your dream rig. With a user-friendly interface, assemble your ideal PC in just a few simple steps. Whether you're a gamer, content creator, or professional, we've got you covered. Build, customize, and achieve peak performance effortlessly. Start crafting your personalized powerhouse today!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Features & Instructions
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [https://pc-universe-fe.vercel.app/api/hello](https://pc-universe-fe.vercel.app/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+At our website, we've harnessed the latest web technologies to create a cutting-edge platform that allows users to build their dream PCs with ease and efficiency. Below are some of the exciting features we offer:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Powerful Navigation  SSG:
+Our navigation bar comes with multiple routes, making it simple for users to explore various sections of the website.
+Thanks to Static Site Generation (SSG), navigation is ultra-fast and responsive, providing a seamless browsing experience.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. User-Friendly Login System:
+We understand the importance of security and convenience. That's why we offer a login system that enables users to access their accounts with ease.
+Users can log in via their Google accounts, ensuring a streamlined login process.
 
-## Learn More
+3. PC Builder Page with SSR:
+Our PC builder page is powered by Server-Side Rendering (SSR), allowing users to customize their PC builds in real-time.
+Handpick premium components to create a personalized powerhouse tailored to your specific needs.
 
-To learn more about Next.js, take a look at the following resources:
+4. Feature Product and Category Sections:
+Explore our meticulously curated feature product section, highlighting top-tier components from leading brands.
+Browse through our category sections that cater to diverse user preferences, including gaming, content creation, and professional use.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Product Details Page with SSG:
+Delve into comprehensive product information through our product details page, enriched by Static Site Generation (SSG) for fast loading and optimal user experience.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+6. Secure User-PC Associations:
+To ensure users' hard work isn't lost, we allow them to save and manage their PC builder items for future reference or modification.Each user's PC configurations are safely associated with their accounts, providing a seamless experience across devices.
 
-## Deploy on Vercel
+Experience the thrill of building your perfect PC, powered by our innovative SSG and SSR technologies. Explore the possibilities, create your custom rig, and embark on an exceptional journey with us. Welcome to the future of PC building!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# pc-universe-fe
+
+
