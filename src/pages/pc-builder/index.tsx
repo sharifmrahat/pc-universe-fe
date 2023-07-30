@@ -39,7 +39,7 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
     { name: "Processor", icon: CpuChipIcon, required: true },
     { name: "Motherboard", icon: BsMotherboard, required: true },
     { name: "RAM", icon: BsMemory, required: true },
-    { name: "Power Supply", icon: BsPlugin, required: false },
+    { name: "Power Supply", icon: BsPlugin, required: true },
     { name: "Storage", icon: BsDeviceSsd, required: true },
     { name: "Monitor", icon: ComputerDesktopIcon, required: false },
     { name: "Graphics Card", icon: PiCircuitry, required: false },
@@ -84,9 +84,9 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
       builderItem?.items?.some((item) => item.category === category)
     );
     if (requiredAdded) {
-      toast.success("Items saved successfully");
+      toast.success("Build Successfully!");
     } else {
-      toast.error("Please add required items");
+      toast.error("Please add required items!");
     }
   };
 
@@ -101,12 +101,20 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
             onClick={handleSaveItem}
             className="border-2 border-secondary text-primary py-1 px-4 rounded-sm cursor-pointer hover:bg-secondary flex flex-row justify-center items-center w-fit"
           >
-            <FaSave className="w-4 h-4 mr-1 inline-block " /> <p>Save</p>
+            <FaSave className="w-4 h-4 mr-1 inline-block" />{" "}
+            <p>Complete Build</p>
           </div>
         </div>
         <div className="flex flex-row justify-between items-center border border-primary p-4 rounded-sm mb-4">
           <h3 className="w-fit">
-            Total Amount: <span className="text-red-700">42000</span>
+            Total Amount:{" "}
+            <span className="text-red-700 font-semibold">
+              ${" "}
+              {builderItem?.items.reduce(
+                (total, item) => total + item.price,
+                0
+              )}
+            </span>
           </h3>
           <div className="bg-primary text-accent py-1 px-4 rounded-sm cursor-pointer w-fit">
             Place Order
@@ -132,10 +140,12 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
                       <div className="rounded-sm p-2 text-primary border border-slate-300 w-fit">
                         <category.icon className="w-8 h-8 mx-auto" />{" "}
                       </div>
-                      <p>{category.name} </p>
-                      <p className="text-xs text-red-700">
-                        {category.required ? "*Required" : ""}
-                      </p>
+                      <div>
+                        <p>{category.name}</p>
+                        <p className="text-xs text-red-700">
+                          {category.required ? "Required" : ""}
+                        </p>{" "}
+                      </div>
                     </div>
                     <Link
                       href={`/pc-builder/${category.name}`}
