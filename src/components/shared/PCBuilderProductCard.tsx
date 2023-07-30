@@ -68,7 +68,9 @@ const PCBuilderProductCard = ({ product }: PCBuilderProductCardProps) => {
       <div className="flex flex-col gap-2 mt-4">
         <div onClick={handleNavigation}>
           <h3 className="text-lg lg:text-xl font-semibold px-5 w-fit mx-auto text-center">
-            {product.name}
+            {product.name.length > 25
+              ? product.name.substring(0, 25) + "..."
+              : product.name}
           </h3>
           <div className="w-fit mx-auto px-5">
             <p className="text-red-500 font-semibold">$ {product.price}</p>

@@ -84,7 +84,7 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
       builderItem?.items?.some((item) => item.category === category)
     );
     if (requiredAdded) {
-      toast.success("Build Successfully!");
+      toast.success("Build Successful!");
     } else {
       toast.error("Please add required items!");
     }
