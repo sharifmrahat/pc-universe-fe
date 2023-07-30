@@ -4,7 +4,8 @@ import { NextPageWithLayout } from "../_app";
 import DefaultLayout from "@/layouts/default";
 import { ShoppingCartIcon, SquaresPlusIcon } from "@heroicons/react/24/outline";
 import type { GetStaticProps, GetStaticPaths } from "next";
-import { IProduct } from "@/types/product";
+import { IProduct, IReview } from "@/types/product";
+import Reviews from "@/components/sections/ReviewsSections";
 
 type ProductDetailsPageProps = {
   product?: IProduct;
@@ -34,6 +35,10 @@ const ProductDetailsPage: NextPageWithLayout = ({
             <div className="flex flex-row justify-between items-start gap-5">
               <p>Status</p>
               <p>{product?.status}</p>
+            </div>
+            <div className="flex flex-row justify-between items-start gap-5">
+              <p>Category</p>
+              <p>{product?.category}</p>
             </div>
             <div className="flex flex-row justify-between items-center gap-5">
               <p>Model</p>
@@ -76,6 +81,10 @@ const ProductDetailsPage: NextPageWithLayout = ({
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="my-10 w-full lg:w-4/5 mx-auto">
+        <Reviews reviews={product?.reviews as IReview[]} />
       </section>
     </main>
   );

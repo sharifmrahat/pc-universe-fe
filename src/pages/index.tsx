@@ -34,7 +34,7 @@ export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch(
-    "https://pc-universe-be.vercel.app/api/v1/products?limit=6"
+    "https://pc-universe-be.vercel.app/api/v1/products?limit=8"
   );
   const products = await res.json();
   return {

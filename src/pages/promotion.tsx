@@ -3,7 +3,7 @@ import { NextPageWithLayout } from "./_app";
 import DefaultLayout from "@/layouts/default";
 
 const PromotionPage: NextPageWithLayout = () => {
-  return <main className="my-20">Promotion Page</main>;
+  return <main className="py-20 h-screen"></main>;
 };
 
 PromotionPage.getLayout = function getLayout(page: ReactElement) {

@@ -27,11 +27,11 @@ const FeatureCategories = () => {
     { name: "Power Supply", icon: BsPlugin },
     { name: "Storage", icon: BsDeviceSsd },
     { name: "Monitor", icon: ComputerDesktopIcon },
-    // { name: "Graphics Card", icon: PiCircuitry },
-    // { name: "Casing", icon: CubeIcon },
-    // { name: "CPU Cooler", icon: BsFan },
+    { name: "Graphics Card", icon: PiCircuitry },
+    { name: "Casing", icon: CubeIcon },
+    { name: "CPU Cooler", icon: BsFan },
     // { name: "UPS", icon: PiBatteryChargingVerticalFill },
-    // { name: "Accessories", icon: SwatchIcon },
+    { name: "Accessories", icon: SwatchIcon },
   ];
 
   return (
@@ -45,7 +45,7 @@ const FeatureCategories = () => {
         </p>
       </div>
       <div>
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-8 justify-center items-center px-5 lg:px-0">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 justify-center items-center px-5 lg:px-16">
           {categories.map((category) => (
             <CategoryCard key={category.name} category={category} />
           ))}
