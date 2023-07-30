@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { IProduct } from "@/types/product";
 import CategoryProductCard from "@/components/shared/CategoryProductCard";
 import { useRouter } from "next/router";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 type CategoryDetailsPageProps = {
   products?: IProduct[];
@@ -28,10 +29,29 @@ const CategoryDetailsPage: NextPageWithLayout = ({
         </div>
         <div>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center items-center px-5 lg:px-0">
-            {products?.length &&
+            {products?.length ? (
               products?.map((product) => (
                 <CategoryProductCard key={product._id} product={product} />
-              ))}
+              ))
+            ) : (
+              <>
+                <div className="rounded-md bg-yellow-50 p-4 w-fit mx-auto">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <ExclamationTriangleIcon
+                        className="h-5 w-5 text-yellow-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-yellow-800">
+                        Not Items Found!
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

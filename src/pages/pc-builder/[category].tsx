@@ -1,6 +1,7 @@
 import PCBuilderProductCard from "@/components/shared/PCBuilderProductCard";
 import DefaultLayout from "@/layouts/default";
 import { IProduct } from "@/types/product";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
@@ -17,7 +18,7 @@ const PCBuilderDetailsPage = ({ products }: PCBuilderDetailsPageProgs) => {
       <div>
         <div className="text-center mb-8">
           <h3 className="text-primary text-xl lg:text-2xl font-semibold">
-            Product Category: {category}
+            PC Builder Items: {category}
           </h3>
           <p className="text-sm lg:text-lg text-slate-500">
             Check & Get Your Desired Product!
@@ -25,10 +26,29 @@ const PCBuilderDetailsPage = ({ products }: PCBuilderDetailsPageProgs) => {
         </div>
         <div>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 justify-center items-center px-5 lg:px-0">
-            {products?.length &&
+            {products?.length ? (
               products?.map((product) => (
                 <PCBuilderProductCard key={product._id} product={product} />
-              ))}
+              ))
+            ) : (
+              <>
+                <div className="rounded-md bg-yellow-50 p-4 w-fit mx-auto">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <ExclamationTriangleIcon
+                        className="h-5 w-5 text-yellow-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-yellow-800">
+                        Not Items Found!
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
