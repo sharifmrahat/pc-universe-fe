@@ -6,6 +6,7 @@ import { Oswald } from "next/font/google";
 import SignupForm from "@/components/shared/SignupForm";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const oswald = Oswald({ style: "normal", weight: "600", subsets: ["latin"] });
 
@@ -13,7 +14,9 @@ const Signup = () => {
   const router = useRouter();
 
   const { callbackUrl } = router.query;
-  const handleSignupSubmit = (data: any) => {};
+  const handleSignupSubmit = (data: any) => {
+    toast.warn("Credential not implemented! Please continue with Google.");
+  };
 
   return (
     <div className="flex flex-row justify-center items-center h-screen gap-10 overflow-hidden">

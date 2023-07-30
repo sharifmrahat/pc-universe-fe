@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 type PCBuilderProductCardProps = {
   product: IProduct;
@@ -36,9 +37,14 @@ const PCBuilderProductCard = ({ product }: PCBuilderProductCardProps) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          router.push("/pc-builder");
+          if (data.success) {
+            toast.success(data.message);
+            router.push("/pc-builder");
+          }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          toast.error(error.message);
+        });
     }
   };
 

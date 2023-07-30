@@ -6,14 +6,18 @@ import Link from "next/link";
 import { Oswald } from "next/font/google";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+// import { useToast } from "react-toastify";
 
 const oswald = Oswald({ style: "normal", weight: "600", subsets: ["latin"] });
 
 const LoginPage = () => {
   const router = useRouter();
-
+  // const toast = useToast()
   const { callbackUrl } = router.query;
-  const handleLoginSubmit = (data: any) => {};
+  const handleLoginSubmit = (data: any) => {
+    toast.warn("Credential not implemented! Please continue with Google.");
+  };
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center h-screen gap-10 overflow-hidden">
@@ -53,7 +57,7 @@ const LoginPage = () => {
 
             <LoginForm onSubmit={handleLoginSubmit} isLoading={false} />
             <p className="text-center mt-5 text-sm text-slate-700">
-              Dont have an account?{" "}
+              {"Don't"} have an account?{" "}
               <Link
                 href="/signup"
                 className="text-primary underline focus:outline-none ml-2"

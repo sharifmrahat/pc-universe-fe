@@ -26,6 +26,7 @@ import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { IPCBuilder } from "@/types/pc-builder";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 type PCBuilderPage = {
   builderItem?: IPCBuilder;
@@ -35,17 +36,17 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
   const { data: session } = useSession();
   const router = useRouter();
   const categories = [
-    { name: "Processor", icon: CpuChipIcon },
-    { name: "Motherboard", icon: BsMotherboard },
-    { name: "RAM", icon: BsMemory },
-    { name: "Power Supply", icon: BsPlugin },
-    { name: "Storage", icon: BsDeviceSsd },
-    { name: "Monitor", icon: ComputerDesktopIcon },
-    { name: "Graphics Card", icon: PiCircuitry },
-    { name: "Casing", icon: CubeIcon },
-    { name: "CPU Cooler", icon: BsFan },
-    { name: "UPS", icon: PiBatteryChargingVerticalFill },
-    { name: "Accessories", icon: SwatchIcon },
+    { name: "Processor", icon: CpuChipIcon, required: true },
+    { name: "Motherboard", icon: BsMotherboard, required: true },
+    { name: "RAM", icon: BsMemory, required: true },
+    { name: "Power Supply", icon: BsPlugin, required: false },
+    { name: "Storage", icon: BsDeviceSsd, required: true },
+    { name: "Monitor", icon: ComputerDesktopIcon, required: false },
+    { name: "Graphics Card", icon: PiCircuitry, required: false },
+    { name: "Casing", icon: CubeIcon, required: false },
+    { name: "CPU Cooler", icon: BsFan, required: false },
+    { name: "UPS", icon: PiBatteryChargingVerticalFill, required: false },
+    { name: "Accessories", icon: SwatchIcon, required: false },
   ];
 
   const handleRemove = (productId: string) => {
@@ -63,9 +64,29 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          router.push("/pc-builder");
+          if (data.success) {
+            toast.success(data.message);
+            router.push("/pc-builder");
+          }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    }
+  };
+
+  const handleSaveItem = () => {
+    const requiredCategories = categories
+      .filter((category) => category.required)
+      .map((category) => category.name);
+
+    const requiredAdded = requiredCategories.every((category) =>
+      builderItem?.items?.some((item) => item.category === category)
+    );
+    if (requiredAdded) {
+      toast.success("Items saved successfully");
+    } else {
+      toast.error("Please add required items");
     }
   };
 
@@ -76,7 +97,10 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
           <h3 className="text-lg lg:text-xl text-primary font-semibold">
             PC Builder
           </h3>
-          <div className="border-2 border-secondary text-primary py-1 px-4 rounded-sm cursor-pointer hover:bg-secondary flex flex-row justify-center items-center w-fit">
+          <div
+            onClick={handleSaveItem}
+            className="border-2 border-secondary text-primary py-1 px-4 rounded-sm cursor-pointer hover:bg-secondary flex flex-row justify-center items-center w-fit"
+          >
             <FaSave className="w-4 h-4 mr-1 inline-block " /> <p>Save</p>
           </div>
         </div>
@@ -108,7 +132,10 @@ const PCBuilderPage: NextPageWithLayout = ({ builderItem }: PCBuilderPage) => {
                       <div className="rounded-sm p-2 text-primary border border-slate-300 w-fit">
                         <category.icon className="w-8 h-8 mx-auto" />{" "}
                       </div>
-                      <p>{category.name}</p>
+                      <p>{category.name} </p>
+                      <p className="text-xs text-red-700">
+                        {category.required ? "*Required" : ""}
+                      </p>
                     </div>
                     <Link
                       href={`/pc-builder/${category.name}`}
